@@ -1,0 +1,17 @@
+[Unit]
+Description=DbC Service
+After=network.target auditd.service nginx.service
+ConditionPathExists=/home/dbc/dbc
+ConditionPathExists=/home/dbc/dbc.json
+
+[Service]
+User=dbc
+Group=dbc
+SyslogIdentifier=dbc
+ExecStart=xvfb-run /home/dbc/dbc /home/dbc/dbc.json
+Restart=on-failure
+Type=simple
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
